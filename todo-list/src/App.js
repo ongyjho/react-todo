@@ -4,6 +4,7 @@ import Form from './components/Form';
 import TodoItemList from './components/TodoItemList';
 
 import './App.css';
+import Palette from './components/Palette';
 
 class App extends Component {
   id = 3 // 이미 0,1,2 가 존재하므로 3으로 설정
@@ -13,13 +14,14 @@ class App extends Component {
       { id: 0, text: ' 리액트 소개', checked: false },
       { id: 1, text: ' 리액트 소개', checked: true },
       { id: 2, text: ' 리액트 소개', checked: false }
-    ]
+    ],
+    color: '#228ae6' 
   }
 
 
   handleChange = (e) => {
     this.setState({
-      input: e.target.value // input 의 다음 바뀔 값
+      input: e.target.value,
     });
   }
 
@@ -30,6 +32,7 @@ class App extends Component {
       todos: todos.concat({
         id: this.id++,
         text: input,
+        color: this.state.color,
         checked: false
       })
     });
@@ -59,6 +62,12 @@ class App extends Component {
     });
   }
 
+  changeColor = (color) => {
+    this.setState({
+      color: color
+    });
+  }
+
   render () {
     const { input, todos } = this.state;
     const {
@@ -66,18 +75,20 @@ class App extends Component {
       handleCreate,
       handleKeyPress,
       handleToggle,
-      handleRemove
+      handleRemove,
+      changeColor,
     } = this;
 
     return (
       <TodoListTemplate form={(
-        <Form 
+        <Form color={this.state.color}
           value={input}
           onKeyPress={handleKeyPress}
           onChange={handleChange}
           onCreate={handleCreate}
         />
       )}>
+        <Palette changeColor={changeColor}></Palette>
         <TodoItemList todos={todos} onToggle={handleToggle} onRemove={handleRemove}/>
       </TodoListTemplate>
     )
