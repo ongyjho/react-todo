@@ -33,7 +33,7 @@ const ye = function sdfdsfd() {
 
 #### 확장 표현
 - ES6 이후 변형된 표현 중 유명한 것은 arrow function 이 있다. 람다식이라고도 부른다.
-
+- 일반 함수는 자신이 종속된 객체를 this로 가리키며, 화살표 함수는 자신이 종속된 인스턴스를 가리킨다.
 `const alpha = function () {} `
 `const alpha = (x) => {}`  
 
